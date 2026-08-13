@@ -5,15 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>B2B Customer Registration</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+</style>
+<style>
   * { box-sizing: border-box; }
   body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #fff;
+    font-family: "Barlow", Arial, Helvetica, sans-serif;
+    background: #f0f0f0;
     color: #1a1a1a;
+    line-height: 1.5;
     margin: 0;
-    padding: 40px 16px;
+    padding: 0;
   }
-  .form-wrap { max-width: 640px; margin: 0 auto; }
+  #top {
+    background: #fff;
+    padding: 24px;
+  }
+  #logo {
+    display: block;
+    margin: 0 auto;
+    max-width: 240px;
+  }
+  .form-outer {
+    padding: 40px 14px;
+  }
+  .form-wrap {
+    max-width: 640px;
+    margin: 0 auto;
+  }
   h1 { font-size: 1.6rem; margin: 0 0 8px; }
   .intro { font-size: 0.95rem; color: #444; margin-bottom: 4px; }
   .intro a { color: #b02a2a; }
@@ -58,10 +77,12 @@
   button[type="submit"] {
     background: #b02a2a;
     color: #fff;
+    display: block;
     font-size: 1rem;
     font-weight: bold;
     border: none;
     border-radius: 4px;
+    margin: 0 0 0 auto;
     padding: 12px 32px;
     cursor: pointer;
   }
@@ -83,6 +104,12 @@
 </style>
 </head>
 <body>
+<header id="top">
+  <a href="https://www.byallen.com">
+    <img src="/assets/allen-red.svg" id="logo"/>
+  </a>
+</header>
+<div class="form-outer">
 <div class="form-wrap">
   <h1>B2B Customer Registration</h1>
   <p class="intro">This application is for US only, excluding Hawaii, Alaska, &amp; international territories.
@@ -236,6 +263,7 @@
     <button type="submit">Submit Application</button>
     <div id="form-status"></div>
   </form>
+</div>
 </div>
 
 <script>
