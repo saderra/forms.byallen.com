@@ -176,35 +176,30 @@
     </fieldset>
 
     <fieldset>
-      <legend>Contact Information</legend>
+      <legend>Access Credentials</legend>
+
+      <div class="field">
+        <label for="email">Designated Email <span class="req">*</span></label>
+        <input type="email" id="email" name="email" required>
+        <p class="error-msg">Enter a valid email address.</p>
+      </div>
+
       <div class="row">
         <div class="field">
-          <label for="firstName">First Name <span class="req">*</span></label>
+          <label for="firstName">First Name of Designated User <span class="req">*</span></label>
           <input type="text" id="firstName" name="firstName" required>
           <p class="error-msg">First name is required.</p>
         </div>
         <div class="field">
-          <label for="lastName">Last Name <span class="req">*</span></label>
+          <label for="lastName">Last Name of Designated User <span class="req">*</span></label>
           <input type="text" id="lastName" name="lastName" required>
           <p class="error-msg">Last name is required.</p>
         </div>
       </div>
-      <div class="row">
-        <div class="field">
-          <label for="title">Title / Position</label>
-          <input type="text" id="title" name="title">
-          <p class="error-msg"></p>
-        </div>
-        <div class="field">
-          <label for="phone">Phone <span class="req">*</span></label>
-          <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555" required>
-          <p class="error-msg">Enter a valid 10-digit US phone number.</p>
-        </div>
-      </div>
       <div class="field">
-        <label for="email">Email <span class="req">*</span></label>
-        <input type="email" id="email" name="email" required>
-        <p class="error-msg">Enter a valid email address.</p>
+        <label for="phone">Phone number of Designated User <span class="req">*</span></label>
+        <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555" required>
+        <p class="error-msg">Enter a valid 10-digit US phone number.</p>
       </div>
     </fieldset>
 
