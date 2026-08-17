@@ -286,6 +286,12 @@
         <input type="number" id="creditAmount" name="creditAmount" min="0" step="1000" data-if="creditRequested" data-if-equals="Yes">
         <p class="error-msg">Please enter the credit amount you are requesting.</p>
       </div>
+      <div class="field">
+        <label for="creditReferencesFile">Credit References</label>
+        <input type="file" id="creditReferencesFile" name="creditReferencesFile" accept=".pdf,.jpg,.jpeg,.png" data-if="creditRequested" data-if-equals="Yes">
+        <p class="file-hint">Please include at least four non-distributor references. PDF, JPG, or PNG — max 8 MB.</p>
+        <p class="error-msg">File must be a PDF, JPG, or PNG under 8 MB.</p>
+      </div>
     </fieldset>
 
     <fieldset>
