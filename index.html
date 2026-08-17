@@ -48,8 +48,9 @@
   .field { flex: 1 1 260px; margin-bottom: 14px; }
   label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; }
   label .req { color: #b02a2a; }
-  input[type="text"], input[type="email"], input[type="tel"],
-  input[type="url"], select, textarea {
+  input[type="text"], input[type="email"], input[type="number"],
+  input[type="tel"], input[type="url"],
+  select, textarea {
     width: 100%;
     padding: 9px 10px;
     font-size: 0.95rem;
@@ -114,8 +115,12 @@
   <h1>B2B Customer Registration</h1>
   <p class="intro">This application is for US only, excluding Hawaii, Alaska, &amp; international territories.</p>
 
-  <p><strong>Third-Party Resellers:</strong> Please be advised that Allen Company does not accept applications from third-party resellers. Submitting a W-9 or sales tax exemption certificate does not qualify a third-party reseller for approval, and these applications will be respectfully declined.</p>
+  <p>
+    <strong>Third-Party Resellers:</strong> Please be advised that Allen Company does not accept applications from third-party resellers.
+    Submitting a W-9 or sales tax exemption certificate does not qualify a third-party reseller for approval, and these applications will be respectfully declined.
+  </p>
 
+  <p>Please read our <a href="https://byallen.com/pages/reseller-policy" target="_blank">Reseller Policy</a>.</p>
 
   For all international inquiries, please reach out to <a href="mailto:B2BCustomerService@AllenCompany.net">B2BCustomerService@AllenCompany.net</a>.</p>
   <p class="req-note">* Indicates required fields</p>
@@ -150,10 +155,15 @@
           <label for="businessType">Business Type <span class="req">*</span></label>
           <select id="businessType" name="businessType" required>
             <option value="">Select one…</option>
-            <option>Retail Storefront</option>
-            <option>Online Retailer</option>
-            <option>Distributor</option>
-            <option>Range / Club</option>
+            <option>Corporation</option>
+            <!-- <option>Distributor</option> -->
+            <option>LLC</option>
+            <option>Non-profit</option>
+            <!-- <option>Online Retailer</option> -->
+            <option>Partnership</option>
+            <option>Proprietorship</option>
+            <!-- <option>Range / Club</option> -->
+            <!-- <option>Retail Storefront</option> -->
             <option>Other</option>
           </select>
           <p class="error-msg">Please select a business type.</p>
@@ -175,6 +185,11 @@
           <input type="text" id="resaleCert" name="resaleCert">
           <p class="error-msg"></p>
         </div>
+      </div>
+      <div class="field">
+        <label for="employees">Number of Employees <span class="req">*</span></label>
+        <input type="number" id="employees" name="employees" min="1" required>
+        <p class="error-msg"></p>
       </div>
     </fieldset>
 
@@ -231,11 +246,11 @@
           </select>
           <p class="error-msg">Please select a state (AK and HI are not eligible).</p>
         </div>
-        <div class="field" style="flex: 0 1 160px;">
-          <label for="zip">ZIP Code <span class="req">*</span></label>
-          <input type="text" id="zip" name="zip" placeholder="80027" maxlength="10" required>
-          <p class="error-msg">Enter a valid ZIP (12345 or 12345-6789).</p>
-        </div>
+      </div>
+      <div class="field">
+        <label for="zip">ZIP Code <span class="req">*</span></label>
+        <input type="text" id="zip" name="zip" placeholder="80027" maxlength="10" required>
+        <p class="error-msg">Enter a valid ZIP (12345 or 12345-6789).</p>
       </div>
     </fieldset>
 
@@ -252,6 +267,24 @@
         <input type="file" id="w9File" name="w9File" accept=".pdf,.jpg,.jpeg,.png">
         <p class="file-hint">PDF, JPG, or PNG — max 8 MB.</p>
         <p class="error-msg">File must be a PDF, JPG, or PNG under 8 MB.</p>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Credit</legend>
+      <div class="field">
+        <label for="creditRequested">Credit Line Requested? <span class="req">*</span></label>
+        <select id="creditRequested" name="creditRequested" required>
+          <option value="">Select one…</option>
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+        <p class="error-msg">Please select an option.</p>
+      </div>
+      <div class="field">
+        <label for="creditAmount">Credit Amount Requested (USD)</label>
+        <input type="number" id="creditAmount" name="creditAmount" min="0" step="1000" data-if="creditRequested" data-if-equals="Yes">
+        <p class="error-msg">Please enter the credit amount you are requesting.</p>
       </div>
     </fieldset>
 
@@ -351,6 +384,24 @@
       if (field && field.classList.contains("invalid")) validateField(el);
     });
   });
+
+  var toggleInputs = [...inputs].filter(el => !!el.dataset.if)
+  toggleInputs.forEach(function (el) {
+    const container = el.closest('.field')
+    const otherInput = [...inputs].find(other => other.name === el.dataset.if)
+    if (!otherInput) {
+      throw new Error(`Cannot find input with name "${el.dataset.if}"`)
+    }
+    const setVisibility = () => {
+      if (otherInput.value === el.dataset.ifEquals) {
+        container.style.display = 'block'
+      } else {
+        container.style.display = 'none'
+      }
+    }
+    otherInput.addEventListener('change', setVisibility)
+    setVisibility()
+  })
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
